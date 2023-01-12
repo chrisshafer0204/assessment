@@ -1,5 +1,6 @@
 package onesky.assessment.ui.theme
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
@@ -14,7 +15,7 @@ private val DarkColorPalette = darkColorScheme(
 )
 
 @Composable
-fun AssessmentTheme(darkTheme: Boolean = true, content: @Composable() () -> Unit) {
+fun AssessmentTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() () -> Unit) {
     MaterialTheme(
         colorScheme = DarkColorPalette,
         typography = Typography,
