@@ -6,9 +6,6 @@ import retrofit2.http.Path
 
 interface ApiService {
 
-    @GET("all")
-    suspend fun getCountryList(): List<Country>
-
     @GET("name/{country_name}")
     suspend fun getCountryWithName(
         @Path("country_name") countryName : String) : List<Country>

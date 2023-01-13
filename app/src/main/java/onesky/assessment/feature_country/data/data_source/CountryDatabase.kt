@@ -10,27 +10,23 @@ import onesky.assessment.feature_country.domain.model.country.*
     entities = [
         Country::class,
         CapitalInfo::class,
-        Demonyms::class,
         Eng::class,
         Maps::class,
         Name::class,
         NativeName::class,
         Grn::class,
-        PostalCode::class
                ],
-    version = 1
+    version = 2
 )
 @TypeConverters(
     StringTypeConverter::class,
     DoubleTypeConverter::class,
     CapitalInfoTypeConverter::class,
-    DemonymsTypeConverter::class,
     EngTypeConverter::class,
     GrnTypeConverter::class,
     MapsTypeConverter::class,
     NameTypeConverter::class,
     NativeNameTypeConverter::class,
-    PostalCodeTypeConverter::class
 )
 abstract class CountryDatabase : RoomDatabase() {
     abstract val countryDao: CountryDao

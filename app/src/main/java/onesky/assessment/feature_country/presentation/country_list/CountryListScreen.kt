@@ -1,6 +1,5 @@
 package onesky.assessment.feature_country.presentation.country_list
 
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,16 +19,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import onesky.assessment.AppConstants
 import onesky.assessment.R
-import onesky.assessment.feature_country.presentation.CountryListViewModel
-import onesky.assessment.feature_country.presentation.country_list.components.CountryListItem
-import onesky.assessment.feature_country.presentation.country_list.components.bottomnavigation.BottomNavigationBar
-import onesky.assessment.feature_country.presentation.country_list.components.bottomnavigation.BottomNavItem
+import onesky.assessment.feature_country.presentation.components.CountryListItem
+import onesky.assessment.feature_country.presentation.components.bottomnavigation.BottomNavigationBar
+import onesky.assessment.feature_country.presentation.components.bottomnavigation.BottomNavItem
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun CountryListScreen (
     navController: NavController
@@ -61,19 +57,33 @@ fun CountryListScreen (
             horizontalAlignment = Alignment.CenterHorizontally
         ){
 
-            Text(
-                text = stringResource(id = R.string.str_choose_country),
-                style = TextStyle(fontSize = 24.sp),
-                fontWeight = FontWeight.Bold
-            )
-            LazyColumn(modifier = Modifier.fillMaxSize()){
-                items(
-                    countryList
-                ){country ->
-                    CountryListItem(countryName = country){
-                        navController.navigate(AppConstants.SCREEN_NAME_COUNTRY_DETAIL + "/${country}")
-                    }
-                }
+            // Add Title
+            Title()
+
+            // Set Country List
+            CountryList(navController = navController, countryList = countryList)
+
+        }
+    }
+}
+
+@Composable
+fun Title(){
+    Text(
+        text = stringResource(id = R.string.str_choose_country),
+        style = TextStyle(fontSize = 24.sp),
+        fontWeight = FontWeight.Bold
+    )
+}
+
+@Composable
+fun CountryList(navController: NavController, countryList: Array<String>){
+    LazyColumn(modifier = Modifier.fillMaxSize()){
+        items(
+            countryList
+        ){country ->
+            CountryListItem(countryName = country){
+                navController.navigate(AppConstants.SCREEN_NAME_COUNTRY_DETAIL + "/${country}")
             }
         }
     }

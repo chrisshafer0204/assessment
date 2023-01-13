@@ -10,7 +10,7 @@ import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import onesky.assessment.AppConstants.SCREEN_NAME_COUNTRY_LIST
 import onesky.assessment.feature_country.presentation.country_list.CountryListScreen
-import onesky.assessment.feature_country.presentation.country_list.components.Navigation
+import onesky.assessment.feature_country.presentation.components.Navigation
 import onesky.assessment.ui.theme.AssessmentTheme
 import kotlin.text.Typography
 
@@ -22,11 +22,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AssessmentTheme {
-                 Navigation()
+                 Navigation()  // Launch Navigation-  By default it will option Country List Screen
             }
         }
     }
-
 }
 
 

@@ -14,6 +14,10 @@ data class Name(
 ){
     @PrimaryKey(autoGenerate = true)
     var id: Long? = null
+
+    override fun toString(): String {
+        return common
+    }
 }
 
 class NameTypeConverter{

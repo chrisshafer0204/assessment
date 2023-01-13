@@ -1,4 +1,4 @@
-package onesky.assessment.feature_country.presentation.country_list.components
+package onesky.assessment.feature_country.presentation.components
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController

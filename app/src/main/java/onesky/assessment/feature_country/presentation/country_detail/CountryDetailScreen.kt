@@ -1,20 +1,16 @@
 package onesky.assessment.feature_country.presentation.country_detail
 
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.*
-import androidx.compose.runtime.snapshots.SnapshotApplyResult
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.textInputServiceFactory
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -22,12 +18,12 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import onesky.assessment.R
 import onesky.assessment.feature_country.domain.model.country.Country
 import onesky.assessment.feature_country.domain.network.ResultData
-import onesky.assessment.feature_country.presentation.CountryListViewModel
+import onesky.assessment.feature_country.presentation.CountryViewModel
+import onesky.assessment.feature_country.presentation.components.ProgressComponent
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun CountryDetailScreen(
-    countryName: String, viewModel: CountryListViewModel = hiltViewModel()
+    countryName: String, viewModel: CountryViewModel = hiltViewModel()
 ) {
     val scaffoldState = rememberScaffoldState()
     val state by viewModel.countryState.collectAsState()
@@ -41,28 +37,22 @@ fun CountryDetailScreen(
         }
     }
 
-    LaunchedEffect(Unit) {
-        viewModel.getCountryDetail(countryName)
-    }
+    viewModel.getCountryDetail(countryName)
 
     Scaffold(
-        scaffoldState = scaffoldState,
+        scaffoldState = scaffoldState
     ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .background(Color.White)
                 .padding(it)
-                .padding(start = 16.dp, end = 16.dp),
+                .padding(start = 16.dp, end = 16.dp, top = 20.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
             // Text for title
-            Text(
-                text = countryName ?: "",
-                style = TextStyle(fontSize = 24.sp),
-                fontWeight = FontWeight.Bold,
-            )
+            Title(title = countryName)
 
             //Line for Capital
             Capital(country = getCountryDetail())
@@ -78,11 +68,20 @@ fun CountryDetailScreen(
 
             //Line for SubRegion
             SubRegion(country = getCountryDetail())
-
         }
+
+        ProgressComponent(getCountryDetail() == null)
     }
 }
 
+@Composable
+fun Title(title: String){
+    Text(
+        text = title ?: "",
+        style = TextStyle(fontSize = 24.sp),
+        fontWeight = FontWeight.Bold,
+    )
+}
 
 @Composable
 fun Capital(country: Country?) {
@@ -90,14 +89,15 @@ fun Capital(country: Country?) {
         modifier = Modifier
             .fillMaxWidth()
             .height(50.dp),
-        horizontalArrangement = Arrangement.SpaceBetween
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
             text = stringResource(id = R.string.str_capital), fontWeight = FontWeight.Bold
         )
 
         Text(
-            text = country?.capital?.first() ?: "",
+            text = country?.capital?.first() ?: stringResource(id = R.string.str_unknown_info),
         )
     }
 }
@@ -108,7 +108,8 @@ fun Population(country: Country?) {
         modifier = Modifier
             .fillMaxWidth()
             .height(50.dp),
-        horizontalArrangement = Arrangement.SpaceBetween
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
             text = stringResource(id = R.string.str_population), fontWeight = FontWeight.Bold
@@ -124,7 +125,8 @@ fun Area(country: Country?) {
         modifier = Modifier
             .fillMaxWidth()
             .height(50.dp),
-        horizontalArrangement = Arrangement.SpaceBetween
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
             text = stringResource(id = R.string.str_area), fontWeight = FontWeight.Bold
@@ -140,13 +142,14 @@ fun Region(country: Country?) {
         modifier = Modifier
             .fillMaxWidth()
             .height(50.dp),
-        horizontalArrangement = Arrangement.SpaceBetween
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
             text = stringResource(id = R.string.str_region), fontWeight = FontWeight.Bold
         )
 
-        Text(text = (country?.region ?: ""))
+        Text(text = (country?.region ?: stringResource(id = R.string.str_unknown_info)))
     }
 }
 
@@ -156,12 +159,13 @@ fun SubRegion(country: Country?) {
         modifier = Modifier
             .fillMaxWidth()
             .height(50.dp),
-        horizontalArrangement = Arrangement.SpaceBetween
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
             text = stringResource(id = R.string.str_sub_region), fontWeight = FontWeight.Bold
         )
 
-        Text(text = (country?.subregion ?: ""))
+        Text(text = (country?.subregion ?: stringResource(id = R.string.str_unknown_info)))
     }
 }

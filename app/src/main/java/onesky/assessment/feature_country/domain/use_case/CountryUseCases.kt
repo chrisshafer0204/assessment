@@ -1,5 +1,6 @@
 package onesky.assessment.feature_country.domain.use_case
 
+import android.util.Log
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -12,22 +13,6 @@ import javax.inject.Inject
 class CountryUseCases @Inject constructor(
     private val countryRepository: CountryRepository
 ){
-    suspend fun getCountryList(): Flow<ResultData<List<Country>>>{
-        return flow {
-            emit(ResultData.Loading)
-            val countryList = countryRepository.getCountryList()
-
-            val resultData = if (countryList.isEmpty()) {
-                ResultData.Failed()
-            } else {
-                ResultData.Success(countryList)
-            }
-            emit(resultData)
-        }.catch {
-            emit(ResultData.Failed())
-        }
-    }
-
     suspend fun getCountryDetail(countryName: String): Flow<ResultData<List<Country>>>{
         return flow {
             emit(ResultData.Loading)
@@ -36,11 +21,20 @@ class CountryUseCases @Inject constructor(
             val resultData = if (countryList.isEmpty()) {
                 ResultData.Failed()
             } else {
+                countryRepository.insertCountryToLocal(countryList.first())
                 ResultData.Success(countryList)
             }
             emit(resultData)
         }.catch {
             emit(ResultData.Failed())
         }
+    }
+
+    suspend fun getLocalCountry(): Flow<List<Country>>{
+        return countryRepository.getLocalCountryList()
+    }
+
+    suspend fun getLocalCountryByName(countryName: String): Country?{
+        return countryRepository.getLocalCountryDetail(countryName)
     }
 }

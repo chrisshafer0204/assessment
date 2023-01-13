@@ -23,20 +23,14 @@ object AppModule {
         return Room.databaseBuilder(
             app,
             CountryDatabase::class.java,
-            DB_NAME
-        ).build()
+            DB_NAME,
+        ).fallbackToDestructiveMigration().build()
     }
-
-/*    @Provides
-    @Singleton
-    fun provideCountryRepository(db: CountryDatabase): CountryRepository {
-        return CountryRepositoryImpl(db.countryDao)
-    }*/
 
     @Provides
     @Singleton
-    fun provideCountryRepository(apiService: ApiService): CountryRepository {
-        return CountryRepository(apiService)
+    fun provideCountryRepository(apiService: ApiService, db: CountryDatabase): CountryRepository {
+        return CountryRepository(apiService, db.countryDao)
     }
 
     @Provides

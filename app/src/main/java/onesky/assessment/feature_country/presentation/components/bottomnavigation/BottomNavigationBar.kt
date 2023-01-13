@@ -1,4 +1,4 @@
-package onesky.assessment.feature_country.presentation.country_list.components.bottomnavigation
+package onesky.assessment.feature_country.presentation.components.bottomnavigation
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.*
