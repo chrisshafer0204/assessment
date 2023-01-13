@@ -23,9 +23,9 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import onesky.assessment.R
-import onesky.assessment.feature_country.presentation.country_list.components.BottomNavItem
-import onesky.assessment.feature_country.presentation.country_list.components.BottomNavigationBar
+import onesky.assessment.feature_country.presentation.country_list.components.bottomnavigation.BottomNavigationBar
 import onesky.assessment.feature_country.presentation.country_list.components.CountryListItem
+import onesky.assessment.feature_country.presentation.country_list.components.bottomnavigation.BottomNavItem
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -51,7 +51,6 @@ fun CountryListScreen (
                     ),
                 navController = navController,
                 onItemClick = {
-              //      navController.navigate(it.route)
                 }
             )
         },) {

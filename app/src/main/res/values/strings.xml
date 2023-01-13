@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Assessment</string>
 
+    <string name="str_countries">Countries</string>
     <string name="str_choose_country">Choose a Country</string>
 </resources>

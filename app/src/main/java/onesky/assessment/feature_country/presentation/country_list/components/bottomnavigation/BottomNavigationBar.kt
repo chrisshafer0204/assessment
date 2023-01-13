@@ -1,4 +1,4 @@
-package onesky.assessment.feature_country.presentation.country_list.components
+package onesky.assessment.feature_country.presentation.country_list.components.bottomnavigation
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.*
@@ -27,9 +27,8 @@ fun BottomNavigationBar(
         elevation = 5.dp
     ) {
         items.forEach { item ->
-            val selected = item.route == backStackEntry.value?.destination?.route
             BottomNavigationItem(
-                selected = selected,
+                selected = true,
                 onClick = { onItemClick(item) },
                 selectedContentColor = Color.Green,
                 unselectedContentColor = Color.Gray,
@@ -39,13 +38,13 @@ fun BottomNavigationBar(
                             imageVector = item.icon,
                             contentDescription = item.name
                         )
-                        if(selected) {
                             Text(
                                 text = item.name,
                                 textAlign = TextAlign.Center,
-                                fontSize = 10.sp
+                                fontSize = 10.sp,
+                                color = Color.Green
                             )
-                        }
+
                     }
                 }
             )

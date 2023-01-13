@@ -1,6 +1,5 @@
 package onesky.assessment.feature_country.presentation.country_detail
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

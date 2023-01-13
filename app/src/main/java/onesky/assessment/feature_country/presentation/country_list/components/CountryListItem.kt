@@ -16,9 +16,8 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun CountryListItem(countryName: String) {
-    var selectedName : String = ""
+    var selectedName: String = ""
     Surface(modifier = Modifier.clickable {
-
     }) {
         Column(
             modifier = Modifier
@@ -27,7 +26,7 @@ fun CountryListItem(countryName: String) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
         ) {
-
+            Text(text = countryName)
         }
     }
-    }
+}
