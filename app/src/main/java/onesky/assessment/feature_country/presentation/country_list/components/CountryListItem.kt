@@ -12,13 +12,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import onesky.assessment.feature_country.presentation.country_detail.CountryDetailScreen
 
 
 @Composable
-fun CountryListItem(countryName: String) {
-    var selectedName: String = ""
-    Surface(modifier = Modifier.clickable {
-    }) {
+fun CountryListItem(
+    countryName: String,
+    onClickCountry :(String) ->Unit,
+) {
+    Surface(
+        modifier = Modifier.clickable() {
+            onClickCountry(countryName)
+        },
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()

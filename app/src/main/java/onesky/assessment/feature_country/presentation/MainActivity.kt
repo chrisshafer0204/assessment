@@ -12,6 +12,7 @@ import onesky.assessment.AppConstants.SCREEN_NAME_COUNTRY_LIST
 import onesky.assessment.feature_country.presentation.country_list.CountryListScreen
 import onesky.assessment.feature_country.presentation.country_list.components.Navigation
 import onesky.assessment.ui.theme.AssessmentTheme
+import kotlin.text.Typography
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -21,13 +22,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AssessmentTheme {
-                val navController = rememberNavController()
-          /*      navController.navigate(
-                    SCREEN_NAME_COUNTRY_LIST)
-                 Navigation(
-                     navController = navController
-                 )*/
-                CountryListScreen(navController = navController)
+                 Navigation()
             }
         }
     }

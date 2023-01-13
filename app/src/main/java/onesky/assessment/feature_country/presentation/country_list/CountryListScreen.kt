@@ -22,38 +22,37 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import onesky.assessment.AppConstants
 import onesky.assessment.R
-import onesky.assessment.feature_country.presentation.country_list.components.bottomnavigation.BottomNavigationBar
+import onesky.assessment.feature_country.presentation.CountryListViewModel
 import onesky.assessment.feature_country.presentation.country_list.components.CountryListItem
+import onesky.assessment.feature_country.presentation.country_list.components.bottomnavigation.BottomNavigationBar
 import onesky.assessment.feature_country.presentation.country_list.components.bottomnavigation.BottomNavItem
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun CountryListScreen (
-    navController: NavController,
-    viewModel: CountryListViewModel = hiltViewModel()
+    navController: NavController
 ){
 
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
     val countryList = stringArrayResource(id = R.array.countries_array)
 
-    Scaffold(scaffoldState = scaffoldState,
+    Scaffold(
+        scaffoldState = scaffoldState,
         bottomBar = {
             BottomNavigationBar(
                 items = listOf(
                     BottomNavItem(
-                        name = "Countries",
-                        route = "home",
+                        name = stringResource(id = R.string.str_countries),
+                        route = AppConstants.SCREEN_NAME_COUNTRY_LIST,
                         icon = Icons.Default.Home
                     ),
-
-                    ),
-                navController = navController,
-                onItemClick = {
-                }
+                ),
             )
-        },) {
+        },
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -70,13 +69,12 @@ fun CountryListScreen (
             LazyColumn(modifier = Modifier.fillMaxSize()){
                 items(
                     countryList
-                ){ country ->
-                    CountryListItem(countryName = country)
+                ){country ->
+                    CountryListItem(countryName = country){
+                        navController.navigate(AppConstants.SCREEN_NAME_COUNTRY_DETAIL + "/${country}")
+                    }
                 }
             }
         }
     }
-
-
-
 }

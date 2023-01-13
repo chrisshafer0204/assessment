@@ -16,11 +16,8 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 @Composable
 fun BottomNavigationBar(
     items: List<BottomNavItem>,
-    navController: NavController,
     modifier: Modifier = Modifier,
-    onItemClick: (BottomNavItem) -> Unit
 ) {
-    val backStackEntry = navController.currentBackStackEntryAsState()
     BottomNavigation(
         modifier = modifier,
         backgroundColor = Color.DarkGray,
@@ -29,7 +26,7 @@ fun BottomNavigationBar(
         items.forEach { item ->
             BottomNavigationItem(
                 selected = true,
-                onClick = { onItemClick(item) },
+                onClick = { },
                 selectedContentColor = Color.Green,
                 unselectedContentColor = Color.Gray,
                 icon = {

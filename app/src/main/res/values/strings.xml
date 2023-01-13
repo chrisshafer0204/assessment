@@ -3,4 +3,9 @@
 
     <string name="str_countries">Countries</string>
     <string name="str_choose_country">Choose a Country</string>
+    <string name="str_capital">Capital:</string>
+    <string name="str_population">Population:</string>
+    <string name="str_area">Area:</string>
+    <string name="str_region">Region:</string>
+    <string name="str_sub_region">SubRegion:</string>
 </resources>
