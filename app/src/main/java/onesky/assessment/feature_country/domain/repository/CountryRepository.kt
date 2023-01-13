@@ -1,13 +1,16 @@
 package onesky.assessment.feature_country.domain.repository
 
-import kotlinx.coroutines.flow.Flow
 import onesky.assessment.feature_country.domain.model.country.Country
+import onesky.assessment.feature_country.domain.network.ApiService
+import javax.inject.Inject
 
-interface CountryRepository {
+class CountryRepository @Inject constructor(private val apiService: ApiService)  {
 
-    fun getCountries(): Flow<List<Country>>
+    suspend fun getCountryList(): List<Country> {
+        return apiService.getCountryList()
+    }
 
-    suspend fun getCountryByID(id: Int): Country?
-
-    suspend fun insertCountry(country: Country)
+    suspend fun getCountryDetail(countryName : String) : List<Country>{
+        return apiService.getCountryWithName(countryName = countryName)
+    }
 }

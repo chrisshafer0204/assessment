@@ -35,7 +35,4 @@ import onesky.assessment.feature_country.domain.model.country.*
 abstract class CountryDatabase : RoomDatabase() {
     abstract val countryDao: CountryDao
 
-    companion object {
-        const val DATABASE_NAME = "countries_db"
-    }
 }

@@ -1,4 +1,4 @@
-package onesky.assessment.feature_country.presentation.component
+package onesky.assessment.feature_country.presentation.country_list.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.*
@@ -11,7 +11,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import onesky.assessment.feature_country.presentation.country_list.components.BottomNavItem
 
 
 @Composable
