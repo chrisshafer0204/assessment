@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import onesky.assessment.feature_country.domain.model.country.Country
+import onesky.assessment.feature_country.domain.model.country.Name
 import onesky.assessment.feature_country.domain.network.ResultData
 import onesky.assessment.feature_country.domain.repository.CountryRepository
 import javax.inject.Inject
@@ -21,7 +22,9 @@ class CountryUseCases @Inject constructor(
             val resultData = if (countryList.isEmpty()) {
                 ResultData.Failed()
             } else {
-                countryRepository.insertCountryToLocal(countryList.first())
+                val country = countryList.first()
+                country.officialName = country.name?.common ?: ""
+                countryRepository.insertCountryToLocal(country)
                 ResultData.Success(countryList)
             }
             emit(resultData)
@@ -37,4 +40,5 @@ class CountryUseCases @Inject constructor(
     suspend fun getLocalCountryByName(countryName: String): Country?{
         return countryRepository.getLocalCountryDetail(countryName)
     }
+
 }

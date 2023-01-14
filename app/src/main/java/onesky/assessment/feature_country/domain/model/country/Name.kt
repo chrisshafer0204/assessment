@@ -24,8 +24,8 @@ class NameTypeConverter{
 
     @TypeConverter
     fun fromString(value: String) : Name{
-        val listType = object : TypeToken<Name>(){}.type
-        return Gson().fromJson(value, listType)
+        val type = object : TypeToken<Name>(){}.type
+        return Gson().fromJson(value, type)
     }
 
     @TypeConverter

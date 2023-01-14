@@ -38,6 +38,7 @@ fun CountryDetailScreen(
     }
 
     viewModel.getCountryDetail(countryName)
+    viewModel.getLocalCountryByName(countryName)
 
     Scaffold(
         scaffoldState = scaffoldState

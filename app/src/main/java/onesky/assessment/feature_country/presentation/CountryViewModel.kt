@@ -1,6 +1,5 @@
 package onesky.assessment.feature_country.presentation
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,7 +20,6 @@ class CountryViewModel @Inject constructor(
 
     init {
         getLocalCountryList()
-        getLocalCountryByName()
     }
 
     private var _countryState = MutableStateFlow<ResultData<List<Country>>>(ResultData.Loading)
@@ -31,17 +29,15 @@ class CountryViewModel @Inject constructor(
     fun getLocalCountryList(){
         viewModelScope.launch {
             countryUseCases.getLocalCountry().onEach {
-
-            }
-                .collect()
+            }.collect()
         }
     }
 
-    private fun getLocalCountryByName(){
+    fun getLocalCountryByName(countryName: String){
         viewModelScope.launch {
-           val country = countryUseCases.getLocalCountryByName("Argentina")
+           val country = countryUseCases.getLocalCountryByName(countryName)
             if (country == null){
-
+               
             }else{
 
             }

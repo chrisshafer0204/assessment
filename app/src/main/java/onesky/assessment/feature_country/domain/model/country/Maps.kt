@@ -19,8 +19,8 @@ class MapsTypeConverter{
 
     @TypeConverter
     fun fromString(value: String) : Maps{
-        val listType = object : TypeToken<Maps>(){}.type
-        return Gson().fromJson(value, listType)
+        val type = object : TypeToken<Maps>(){}.type
+        return Gson().fromJson(value, type)
     }
 
     @TypeConverter

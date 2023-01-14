@@ -18,7 +18,10 @@ data class Country(
     val population: Int,
     val region: String,
     val subregion: String,
+    val flag: String,
+    var officialName : String
 ){
+
     @PrimaryKey(autoGenerate = true)
     var id: Long? = null
 }

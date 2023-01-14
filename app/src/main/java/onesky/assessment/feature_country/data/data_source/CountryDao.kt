@@ -6,6 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 import onesky.assessment.feature_country.domain.model.country.Country
+import onesky.assessment.feature_country.domain.model.country.Name
 
 @Dao
 interface CountryDao {
@@ -13,7 +14,7 @@ interface CountryDao {
     @Query("SELECT * FROM country")
     fun getCountries(): Flow<List<Country>>
 
-    @Query("SELECT * FROM country WHERE name = :name")
+    @Query("SELECT * FROM country WHERE officialName = :name")
     suspend fun getCountryByName(name: String): Country?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
