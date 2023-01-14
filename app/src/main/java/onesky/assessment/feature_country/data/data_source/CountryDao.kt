@@ -14,7 +14,7 @@ interface CountryDao {
     @Query("SELECT * FROM country")
     fun getCountries(): Flow<List<Country>>
 
-    @Query("SELECT * FROM country WHERE officialName = :name")
+    @Query("SELECT * FROM country WHERE commonName = :name")
     suspend fun getCountryByName(name: String): Country?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

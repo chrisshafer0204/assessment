@@ -22,8 +22,7 @@ class CountryUseCases @Inject constructor(
             val resultData = if (countryList.isEmpty()) {
                 ResultData.Failed()
             } else {
-                val country = countryList.first()
-                country.officialName = country.name?.common ?: ""
+                val country = countryList.first().getCountryWithCommonName()
                 countryRepository.insertCountryToLocal(country)
                 ResultData.Success(countryList)
             }

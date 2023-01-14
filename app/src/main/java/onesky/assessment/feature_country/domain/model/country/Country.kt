@@ -19,11 +19,17 @@ data class Country(
     val region: String,
     val subregion: String,
     val flag: String,
-    var officialName : String
+    var commonName : String
 ){
 
     @PrimaryKey(autoGenerate = true)
     var id: Long? = null
+
+    fun getCountryWithCommonName() : Country{
+        this.commonName = name?.common ?: ""
+        return this
+    }
+
 }
 
 class DoubleTypeConverter{
