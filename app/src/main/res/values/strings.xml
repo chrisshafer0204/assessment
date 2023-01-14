@@ -2,6 +2,7 @@
     <string name="app_name">Assessment</string>
 
     <string name="str_countries">Countries</string>
+    <string name="str_country_details">Country Details</string>
     <string name="str_choose_country">Choose a Country</string>
     <string name="str_capital">Capital:</string>
     <string name="str_population">Population:</string>
