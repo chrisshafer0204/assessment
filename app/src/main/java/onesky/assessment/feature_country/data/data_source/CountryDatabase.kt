@@ -16,7 +16,7 @@ import onesky.assessment.feature_country.domain.model.country.*
         NativeName::class,
         Grn::class,
     ],
-    version = 6
+    version = 1
 )
 @TypeConverters(
     StringTypeConverter::class,

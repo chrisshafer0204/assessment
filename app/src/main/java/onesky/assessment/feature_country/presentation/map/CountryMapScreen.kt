@@ -7,9 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Button
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import android.graphics.Canvas
 import androidx.compose.ui.platform.LocalContext
-import androidx.core.content.ContextCompat
 import com.google.android.gms.maps.model.*
 import com.google.maps.android.compose.*
 import onesky.assessment.R

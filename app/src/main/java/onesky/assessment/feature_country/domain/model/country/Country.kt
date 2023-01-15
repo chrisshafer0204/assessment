@@ -6,16 +6,17 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Country(
-    val altSpellings: List<String> ,
+    val altSpellings: List<String?>? ,
     val area: Double?,
-    val latlng: List<Float>,
+    val latlng: List<Float>?,
     val maps: Maps?,
     val name: Name?,
     val population: Int?,
     val region: String?,
     val subregion: String?,
     val flag: String?,
-    var commonName : String?
+    var commonName : String?,
+    var capitalNew: String?
 ){
 
     @PrimaryKey(autoGenerate = true)
@@ -23,9 +24,13 @@ data class Country(
 
     @Ignore
     val capital: List<String?>? = null
-
     fun getCountryWithCommonName() : Country{
         this.commonName = name?.common ?: ""
+        this.capitalNew = if (capital?.isNotEmpty() == true) capital[0] else ""
         return this
+    }
+
+    fun hasValidLatLng(): Boolean{
+        return latlng?.size == 2
     }
 }

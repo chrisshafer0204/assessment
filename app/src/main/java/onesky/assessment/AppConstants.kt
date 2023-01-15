@@ -6,5 +6,4 @@ object AppConstants {
 
     // Base URL of API
     const val BASE_URL = "https://restcountries.com/v3.1/"
-
 }

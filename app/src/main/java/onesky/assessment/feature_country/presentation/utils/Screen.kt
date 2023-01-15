@@ -10,7 +10,6 @@ sealed class Screen(val route: String){
             return this.route.replace(oldValue =  "{$COUNTRY_NAME_ARGUMENT_KEY}", newValue = countryName)
         }
     }
-
     object CountryMap : Screen(route = "country_map_screen/{$COUNTRY_LATITUDE_ARGUMENT_KEY}/{$COUNTRY_LONGITUDE_ARGUMENT_KEY}"){
         fun passCountryName(latitude : Float, longitude: Float) : String{
             return this.route.replace(oldValue =  "{$COUNTRY_LATITUDE_ARGUMENT_KEY}", newValue = latitude.toString())

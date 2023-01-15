@@ -22,7 +22,7 @@ object CountryUtils {
                     }
                 ),
                 when (position) {
-                    0 -> country?.capital?.first() ?: ""
+                    0 -> country?.capitalNew ?: ""
                     1 -> (country?.population ?: 0).toString()
                     2 -> (country?.area ?: 0.0).toString()
                     3 -> country?.region ?: getString(R.string.str_unknown_info)

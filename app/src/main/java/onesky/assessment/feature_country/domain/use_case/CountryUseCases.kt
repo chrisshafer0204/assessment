@@ -1,42 +1,33 @@
 package onesky.assessment.feature_country.domain.use_case
 
-import android.util.Log
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.flow
 import onesky.assessment.feature_country.domain.model.country.Country
 import onesky.assessment.feature_country.domain.network.ResultData
+import onesky.assessment.feature_country.domain.repository.ConverterUtils
 import onesky.assessment.feature_country.domain.repository.CountryRepository
 import javax.inject.Inject
 
 class CountryUseCases @Inject constructor(
     private val countryRepository: CountryRepository
-){
-    suspend fun getCountryDetail(countryName: String): Flow<ResultData<List<Country>>>{
-        return flow {
-            emit(ResultData.Loading)
+) {
+    suspend fun getCountryDetail(countryName: String): ResultData<Country> {
+        return try {
             val countryList = countryRepository.getCountryDetail(countryName)
-
             val resultData = if (countryList.isEmpty()) {
                 ResultData.Failed()
             } else {
                 val country = countryList.first().getCountryWithCommonName()
                 countryRepository.insertCountryToLocal(country)
-                ResultData.Success(countryList)
+                ResultData.Success(country)
             }
-            emit(resultData)
-        }.catch { it ->
-            emit(ResultData.Failed())
-
+            resultData
+        } catch (e: java.lang.Exception) {
+            ConverterUtils.createResultData(e) {
+                getLocalCountryByName(countryName)
+            }
         }
     }
 
-    fun getLocalCountry(): Flow<List<Country>>{
-        return countryRepository.getLocalCountryList()
-    }
-
-    suspend fun getLocalCountryByName(countryName: String): Country?{
+    private suspend fun getLocalCountryByName(countryName: String): Country? {
         return countryRepository.getLocalCountryDetail(countryName)
     }
-
 }

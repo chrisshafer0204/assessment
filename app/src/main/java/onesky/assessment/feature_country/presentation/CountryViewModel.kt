@@ -22,41 +22,18 @@ class CountryViewModel @Inject constructor(
     private val countryUseCases: CountryUseCases
 ) : ViewModel() {
 
-    init {
-        //   getLocalCountryList()
-    }
 
-    private var _countryState = MutableStateFlow<ResultData<List<Country>>>(ResultData.Loading)
-    val countryState: StateFlow<ResultData<List<Country>>>
+    private var _countryState = MutableStateFlow<ResultData<Country>>(ResultData.Loading)
+    val countryState: StateFlow<ResultData<Country>>
         get() = _countryState
-
-    fun getLocalCountryList() {
-        viewModelScope.launch {
-            countryUseCases.getLocalCountry().onEach {
-            }.collect()
-        }
-    }
-
-    fun getLocalCountryByName(countryName: String) {
-        viewModelScope.launch {
-            val country = countryUseCases.getLocalCountryByName(countryName)
-            if (country == null) {
-
-            } else {
-
-            }
-        }
-    }
 
     // Get Country detail by it's name
     fun getCountryDetail(countryName: String) {
         viewModelScope.launch {
-            countryUseCases.getCountryDetail(countryName).onEach {
-                _countryState.value = it
-            }.collect()
+
+           _countryState.emit(countryUseCases.getCountryDetail(countryName))
         }
     }
-
     fun getRowInfo(context: Context, country: Country?): List<RowInfo> {
         val infoList = ArrayList<RowInfo>()
         for (i in 0..4) {
