@@ -1,4 +1,4 @@
-package onesky.assessment.feature_country.presentation.components
+package onesky.assessment.feature_country.presentation.country_list
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*

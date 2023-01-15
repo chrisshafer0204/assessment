@@ -1,4 +1,4 @@
-package onesky.assessment.feature_country.presentation.components.bottomnavigation
+package onesky.assessment.feature_country.presentation.country_list.bottomnavigation
 
 import androidx.compose.ui.graphics.vector.ImageVector
 import onesky.assessment.R

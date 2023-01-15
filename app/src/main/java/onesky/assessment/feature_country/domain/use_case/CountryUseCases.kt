@@ -4,9 +4,7 @@ import android.util.Log
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
 import onesky.assessment.feature_country.domain.model.country.Country
-import onesky.assessment.feature_country.domain.model.country.Name
 import onesky.assessment.feature_country.domain.network.ResultData
 import onesky.assessment.feature_country.domain.repository.CountryRepository
 import javax.inject.Inject
@@ -27,12 +25,13 @@ class CountryUseCases @Inject constructor(
                 ResultData.Success(countryList)
             }
             emit(resultData)
-        }.catch {
+        }.catch { it ->
             emit(ResultData.Failed())
+
         }
     }
 
-    suspend fun getLocalCountry(): Flow<List<Country>>{
+    fun getLocalCountry(): Flow<List<Country>>{
         return countryRepository.getLocalCountryList()
     }
 

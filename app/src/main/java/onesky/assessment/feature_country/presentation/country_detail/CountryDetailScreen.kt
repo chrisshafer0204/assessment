@@ -2,30 +2,37 @@ package onesky.assessment.feature_country.presentation.country_detail
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Button
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import androidx.navigation.NavGraph.Companion.findStartDestination
+import onesky.assessment.AppConstants
 import onesky.assessment.R
+import onesky.assessment.feature_country.domain.model.RowInfo
 import onesky.assessment.feature_country.domain.model.country.Country
 import onesky.assessment.feature_country.domain.network.ResultData
 import onesky.assessment.feature_country.presentation.CountryViewModel
 import onesky.assessment.feature_country.presentation.components.ProgressComponent
 import onesky.assessment.feature_country.presentation.components.SubTitle
 import onesky.assessment.feature_country.presentation.components.TopBar
+import onesky.assessment.feature_country.presentation.utils.Screen
 
 @Composable
 fun CountryDetailScreen(
+    navController : NavController,
     countryName: String, viewModel: CountryViewModel = hiltViewModel()
 ) {
     val scaffoldState = rememberScaffoldState()
@@ -58,63 +65,28 @@ fun CountryDetailScreen(
 
             // Text for title
             SubTitle(subTitle = countryName)
-            InitInfo(country = getCountryDetail())
+            InitInfo(
+                rowList = viewModel.getRowInfo(
+                    context = LocalContext.current,
+                    getCountryDetail()
+                )
+            )
+
+            Button(onClick = {
+                navController.navigate(route =
+                Screen.CountryMap.passCountryName(getCountryDetail()?.latlng?.get(0)!!,
+                    getCountryDetail()?.latlng?.get(1)!!))
+            }, shape = RectangleShape) {
+                Text(text = stringResource(id = R.string.str_view_on_map))
+            }
         }
         ProgressComponent(getCountryDetail() == null)
     }
 }
 
 @Composable
-fun InitInfo(country: Country?) {
-    //Line for Capital
-    InfoLine(
-        title = stringResource(id = R.string.str_capital),
-        body = country?.capital?.first() ?: ""
-    )
-
-    //Line for Population
-    InfoLine(
-        title = stringResource(id = R.string.str_population),
-        body = (country?.population ?: 0).toString()
-    )
-
-    //Line for Area
-    InfoLine(
-        title = stringResource(id = R.string.str_area),
-        body = (country?.area ?: 0.0).toString()
-    )
-
-    //Line for Region
-    InfoLine(
-        title = stringResource(id = R.string.str_region),
-        body = country?.region ?: stringResource(id = R.string.str_unknown_info)
-    )
-
-    //Line for SubRegion
-    InfoLine(
-        title = stringResource(id = R.string.str_sub_region),
-        body = (country?.subregion ?: stringResource(id = R.string.str_unknown_info))
-    )
+fun InitInfo(rowList: List<RowInfo>) {
+    LazyColumn(modifier = Modifier.fillMaxWidth()) { items(rowList) { row -> CountryInfoItem(rowInfo = row) } }
 }
 
 
-@Composable
-fun InfoLine(title: String, body: String) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(50.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text(
-            text = title,
-            style = MaterialTheme.typography.titleMedium,
-        )
-
-        Text(
-            text = body,
-            style = MaterialTheme.typography.bodyMedium,
-        )
-    }
-}

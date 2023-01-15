@@ -8,8 +8,8 @@ import com.google.gson.reflect.TypeToken
 
 @Entity
 data class Eng(
-    val f: String,
-    val m: String
+    val f: String?,
+    val m: String?
 ){
     @PrimaryKey(autoGenerate = true)
     var id: Long? = null

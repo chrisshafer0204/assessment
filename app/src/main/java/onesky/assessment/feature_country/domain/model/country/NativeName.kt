@@ -8,14 +8,13 @@ import com.google.gson.reflect.TypeToken
 
 @Entity
 data class NativeName(
-    val grn: Grn,
+    val grn: Grn?,
 ){
     @PrimaryKey(autoGenerate = true)
     var id: Long? = null
 }
 
 class NativeNameTypeConverter{
-
     @TypeConverter
     fun fromString(value: String) : NativeName{
         val listType = object : TypeToken<NativeName>(){}.type

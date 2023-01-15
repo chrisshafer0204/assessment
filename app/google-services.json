@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "713116143115",
+    "project_id": "onesky-63b83",
+    "storage_bucket": "onesky-63b83.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:713116143115:android:22fdbb14c9f4cad1ee410e",
+        "android_client_info": {
+          "package_name": "onesky.assessment"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "713116143115-4eaal42jujplu55c2prknqkb7i65ks9c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-XNV3eFo9__OXsmZPIL7q5tNBORpQErw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "713116143115-4eaal42jujplu55c2prknqkb7i65ks9c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

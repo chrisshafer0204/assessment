@@ -8,8 +8,8 @@ import com.google.gson.reflect.TypeToken
 
 @Entity
 data class Maps(
-    val googleMaps: String,
-    val openStreetMaps: String
+    val googleMaps: String?,
+    val openStreetMaps: String?
 ){
     @PrimaryKey(autoGenerate = true)
     var id: Long? = null

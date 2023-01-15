@@ -1,5 +1,6 @@
 package onesky.assessment.feature_country.presentation
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,9 +10,11 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import onesky.assessment.feature_country.domain.model.RowInfo
 import onesky.assessment.feature_country.domain.model.country.Country
 import onesky.assessment.feature_country.domain.network.ResultData
 import onesky.assessment.feature_country.domain.use_case.CountryUseCases
+import onesky.assessment.feature_country.domain.utils.CountryUtils
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,26 +23,26 @@ class CountryViewModel @Inject constructor(
 ) : ViewModel() {
 
     init {
-     //   getLocalCountryList()
+        //   getLocalCountryList()
     }
 
     private var _countryState = MutableStateFlow<ResultData<List<Country>>>(ResultData.Loading)
     val countryState: StateFlow<ResultData<List<Country>>>
         get() = _countryState
 
-    fun getLocalCountryList(){
+    fun getLocalCountryList() {
         viewModelScope.launch {
             countryUseCases.getLocalCountry().onEach {
             }.collect()
         }
     }
 
-    fun getLocalCountryByName(countryName: String){
+    fun getLocalCountryByName(countryName: String) {
         viewModelScope.launch {
-           val country = countryUseCases.getLocalCountryByName(countryName)
-            if (country == null){
+            val country = countryUseCases.getLocalCountryByName(countryName)
+            if (country == null) {
 
-            }else{
+            } else {
 
             }
         }
@@ -52,5 +55,13 @@ class CountryViewModel @Inject constructor(
                 _countryState.value = it
             }.collect()
         }
+    }
+
+    fun getRowInfo(context: Context, country: Country?): List<RowInfo> {
+        val infoList = ArrayList<RowInfo>()
+        for (i in 0..4) {
+            infoList.add(CountryUtils.getRowInfoByTitle(context, country, i))
+        }
+        return infoList
     }
 }

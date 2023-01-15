@@ -8,16 +8,12 @@ import com.google.gson.reflect.TypeToken
 
 @Entity
 data class Name(
-    val common: String,
-    val nativeName: NativeName,
-    val official: String
+    val common: String?,
+    val nativeName: NativeName?,
+    val official: String?
 ){
     @PrimaryKey(autoGenerate = true)
     var id: Long? = null
-
-    override fun toString(): String {
-        return common
-    }
 }
 
 class NameTypeConverter{

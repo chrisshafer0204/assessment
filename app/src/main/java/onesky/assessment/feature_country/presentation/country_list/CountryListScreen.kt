@@ -20,11 +20,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import onesky.assessment.AppConstants
 import onesky.assessment.R
-import onesky.assessment.feature_country.presentation.components.CountryListItem
 import onesky.assessment.feature_country.presentation.components.SubTitle
 import onesky.assessment.feature_country.presentation.components.TopBar
-import onesky.assessment.feature_country.presentation.components.bottomnavigation.BottomNavigationBar
-import onesky.assessment.feature_country.presentation.components.bottomnavigation.BottomNavItem
+import onesky.assessment.feature_country.presentation.country_list.bottomnavigation.BottomNavigationBar
+import onesky.assessment.feature_country.presentation.country_list.bottomnavigation.BottomNavItem
+import onesky.assessment.feature_country.presentation.utils.Screen
 
 @Composable
 fun CountryListScreen(
@@ -43,7 +43,7 @@ fun CountryListScreen(
                 items = listOf(
                     BottomNavItem(
                         name = stringResource(id = R.string.str_countries),
-                        route = AppConstants.SCREEN_NAME_COUNTRY_LIST,
+                        route = Screen.CountryList.route,
                         icon = Icons.Default.Home
                     ),
                 ),
@@ -53,7 +53,6 @@ fun CountryListScreen(
         InitUI(paddingValues = it, navController = navController, countryList = countryList)
     }
 }
-
 @Composable
 fun InitUI(paddingValues: PaddingValues, navController: NavController, countryList: Array<String>) {
     Column(
@@ -72,17 +71,18 @@ fun InitUI(paddingValues: PaddingValues, navController: NavController, countryLi
 
     }
 }
-
-
 @Composable
 fun CountryList(navController: NavController, countryList: Array<String>) {
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         items(
             countryList
         ) { country ->
-            CountryListItem(countryName = country) {
-                navController.navigate(AppConstants.SCREEN_NAME_COUNTRY_DETAIL + "/${country}")
+
+            CountryListItem(countryName = country, onClickCountry =  {navController.navigate(route = Screen.CountryDetail.passCountryName(country))} )
+
+        //        navController.navigate(AppConstants.SCREEN_NAME_COUNTRY_DETAIL + "/${country}")
+
             }
+
         }
-    }
 }

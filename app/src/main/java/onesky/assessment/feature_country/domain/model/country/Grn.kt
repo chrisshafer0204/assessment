@@ -8,8 +8,8 @@ import com.google.gson.reflect.TypeToken
 
 @Entity
 data class Grn(
-    val common: String,
-    val official: String
+    val common: String?,
+    val official: String?
 ){
     @PrimaryKey(autoGenerate = true)
     var id: Long? = null
@@ -19,8 +19,8 @@ class GrnTypeConverter{
 
     @TypeConverter
     fun fromString(value: String) : Grn{
-        val listType = object : TypeToken<Grn>(){}.type
-        return Gson().fromJson(value, listType)
+        val type = object : TypeToken<Grn>(){}.type
+        return Gson().fromJson(value, type)
     }
 
     @TypeConverter
