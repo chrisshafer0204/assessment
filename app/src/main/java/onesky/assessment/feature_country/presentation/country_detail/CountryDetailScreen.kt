@@ -1,6 +1,5 @@
 package onesky.assessment.feature_country.presentation.country_detail
 
-import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -14,7 +13,6 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -77,7 +75,7 @@ fun ViewOnMapButton(navController: NavController, countryDetail: Country?) {
         onClick = {
             navController.navigate(
                 route = Screen.CountryMap.passCountryName(
-                    countryDetail?.latlng?.get(0)!!,
+                    countryDetail?.latlng!![0],
                     countryDetail.latlng[1]
                 )
             )

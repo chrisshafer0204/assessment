@@ -8,6 +8,7 @@ import androidx.compose.ui.text.style.TextAlign
 
 @Composable
 fun TopBar(title: String){
+    // TopBar of each screens
     TopAppBar(title = {
         Text(
             text = title,

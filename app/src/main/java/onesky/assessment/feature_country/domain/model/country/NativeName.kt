@@ -17,8 +17,8 @@ data class NativeName(
 class NativeNameTypeConverter{
     @TypeConverter
     fun fromString(value: String) : NativeName{
-        val listType = object : TypeToken<NativeName>(){}.type
-        return Gson().fromJson(value, listType)
+        val type = object : TypeToken<NativeName>(){}.type
+        return Gson().fromJson(value, type)
     }
 
     @TypeConverter

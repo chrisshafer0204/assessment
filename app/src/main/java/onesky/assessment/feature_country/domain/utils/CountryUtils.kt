@@ -21,7 +21,7 @@ object CountryUtils {
                         else -> R.string.str_unknown_info
                     }
                 ),
-                when (position) {
+                content = when (position) {
                     0 -> country?.capitalNew ?: ""
                     1 -> (country?.population ?: 0).toString()
                     2 -> (country?.area ?: 0.0).toString()

@@ -34,7 +34,7 @@ object ConverterUtils {
         }
     }
 
-    fun convertErrorBody(throwable: HttpException): String? {
+    private fun convertErrorBody(throwable: HttpException): String? {
         return try {
             val body = throwable.response()!!.errorBody()
             convertStreamToString(body?.byteStream()!!)

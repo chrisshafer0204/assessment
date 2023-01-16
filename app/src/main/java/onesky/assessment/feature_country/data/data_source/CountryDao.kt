@@ -6,7 +6,6 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 import onesky.assessment.feature_country.domain.model.country.Country
-import onesky.assessment.feature_country.domain.model.country.Name
 
 @Dao
 interface CountryDao {

@@ -1,6 +1,5 @@
 package onesky.assessment.feature_country.domain.repository
 
-import kotlinx.coroutines.flow.Flow
 import onesky.assessment.feature_country.data.data_source.CountryDao
 import onesky.assessment.feature_country.domain.model.country.Country
 import onesky.assessment.feature_country.domain.network.ApiService
@@ -18,11 +17,6 @@ class CountryRepository @Inject constructor(
     suspend fun insertCountryToLocal(country: Country){
         dao.insertCountry(country)
     }
-
-    fun getLocalCountryList(): Flow<List<Country>>{
-       return dao.getCountries()
-    }
-
     suspend fun getLocalCountryDetail(countryName: String): Country?{
         return dao.getCountryByName(countryName)
     }

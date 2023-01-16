@@ -24,7 +24,7 @@ data class Country(
 
     @Ignore
     val capital: List<String?>? = null
-    fun getCountryWithCommonName() : Country{
+    fun getCountryWithRenewedValues() : Country{
         this.commonName = name?.common ?: ""
         this.capitalNew = if (capital?.isNotEmpty() == true) capital[0] else ""
         return this

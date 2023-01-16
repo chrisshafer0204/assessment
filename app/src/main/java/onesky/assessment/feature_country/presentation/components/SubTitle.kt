@@ -7,8 +7,12 @@ import androidx.compose.ui.graphics.Color
 
 @Composable
 fun SubTitle(subTitle: String) {
+
+    //To define subtitles on each screen
     Text(
         text = subTitle,
+
+        // Text Style
         style = MaterialTheme.typography.titleLarge,
         color = Color.Black
     )

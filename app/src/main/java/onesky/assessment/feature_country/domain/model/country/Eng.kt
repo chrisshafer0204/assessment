@@ -19,8 +19,8 @@ class EngTypeConverter{
 
     @TypeConverter
     fun fromString(value: String) : Eng{
-        val listType = object : TypeToken<Eng>(){}.type
-        return Gson().fromJson(value, listType)
+        val type = object : TypeToken<Eng>(){}.type
+        return Gson().fromJson(value, type)
     }
 
     @TypeConverter
